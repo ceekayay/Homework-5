@@ -26,4 +26,7 @@ library("ggthemes")
 
 ```{r data}
 homicides <- read_csv("data/homicide-data.csv")
+
+homicides <- homicides %>%
+  mutate(city_name = paste(city, state, sep = ""))
 ```
