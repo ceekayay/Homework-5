@@ -51,10 +51,12 @@ baltimore <- homicides %>%
 Next, I'll work on recreating the graph from the coursebook.
 ```{r graph}
 baltimore %>%
-  ggplot(aes(x = month_year, y = total_homicides)) +
+  ggplot(aes(x = month_year, y = total_homicides, fill = season)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Homicides in Baltimore, MD",
        x = "Date",
        y = "Monthly Homicides") +
+  scale_fill_manual(values = c("summer" = "lightgray", 
+                               "winter" = "lightblue")) +
   theme_dark()
 ```
