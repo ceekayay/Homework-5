@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+As always, I'll load my libraries first.
 ```{r libraries, message = FALSE}
 library("tidyverse")
 library("readr")
@@ -24,24 +25,26 @@ library("stringr")
 library("ggthemes")
 ```
 
-```{r data}
+First, I'll load and clean the homicides data.
+```{r data, message = FALSE}
 homicides <- read_csv("data/homicide-data.csv")
 
 homicides <- homicides %>%
-  mutate(city_name = paste(city, state, sep = ""))
+  mutate(city_name = paste(city, state, sep = ", "))
 ```
+
+Organize and tidy baltimore data.
 ```{r baltimore}
 baltimore <- homicides %>%
   filter(city_name == "Baltimore, MD") %>%
-  mutate(reported_date = as.Date(as.character(reported_date)), 
-                                 format = "%Y%m%d",
-                                 day = day(reported_date),
-                                 month = month(reported_date),
-                                 year = year(reported_date)) %>%
+  mutate(reported_date = as.Date(as.character(reported_date), format = "%Y%m%d"),
+         day = day(reported_date),
+         month = month(reported_date),
+         year = year(reported_date)) %>%
   group_by(year, month) %>%
   summarize(total_homicides = n()) %>%
   mutate(month_year = as.Date(paste(year, month, "01", sep = "-"))) %>%
-  mutate(season = case_when(
-    month >=5 & month <=10 ~ "summer",
-    month >=1 & month <=4 | month %in% 11:12 ~ "winter"))
+    mutate(season = case_when(
+    month >= 5 & month <= 10 ~ "summer",
+    month >= 1 & month <=4 | month %in% 11:12 ~ "winter"))
 ```
