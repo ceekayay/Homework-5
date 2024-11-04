@@ -32,5 +32,10 @@ homicides <- homicides %>%
 ```
 ```{r baltimore}
 baltimore <- homicides %>%
-  filter(city_name == "Baltimore, MD")
+  filter(city_name == "Baltimore, MD") %>%
+  mutate(reported_date = as.Date(as.character(reported_date)), 
+                                 format = "%Y%m%d",
+                                 day = day(reported_date),
+                                 month = month(reported_date),
+                                 year = year(reported_date))
 ```
