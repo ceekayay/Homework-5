@@ -53,6 +53,12 @@ Next, I'll work on recreating the graph from the coursebook.
 baltimore %>%
   ggplot(aes(x = month_year, y = total_homicides, fill = season)) +
   geom_bar(stat = "identity", position = "dodge") +
+  geom_vline(xintercept = as.Date("2015-04-12"), color = "red", linetype = "dashed", size = 1) +
+  geom_text(aes(x = as.Date("2015-04-12"), y = 40),
+            label = "Arrest of Freddie Gray",
+            color = "lightgray",
+            size = 4,
+            vjust = -0.5) +
   labs(title = "Homicides in Baltimore, MD",
        x = "Date",
        y = "Monthly Homicides") +
