@@ -37,5 +37,8 @@ baltimore <- homicides %>%
                                  format = "%Y%m%d",
                                  day = day(reported_date),
                                  month = month(reported_date),
-                                 year = year(reported_date))
+                                 year = year(reported_date)) %>%
+  group_by(year, month) %>%
+  summarize(total_homicides = n()) %>%
+  mutate(month_year = as.Date(paste(year, month, "01", sep = "-")))
 ```
