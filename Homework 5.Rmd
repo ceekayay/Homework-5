@@ -48,3 +48,13 @@ baltimore <- homicides %>%
     month >= 5 & month <= 10 ~ "summer",
     month >= 1 & month <=4 | month %in% 11:12 ~ "winter"))
 ```
+Next, I'll work on recreating the graph from the coursebook.
+```{r graph}
+baltimore %>%
+  ggplot(aes(x = month_year, y = total_homicides)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Homicides in Baltimore, MD",
+       x = "Date",
+       y = "Monthly Homicides") +
+  theme_dark()
+```
