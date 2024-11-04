@@ -30,3 +30,7 @@ homicides <- read_csv("data/homicide-data.csv")
 homicides <- homicides %>%
   mutate(city_name = paste(city, state, sep = ""))
 ```
+```{r baltimore}
+baltimore <- homicides %>%
+  filter(city_name == "Baltimore, MD")
+```
