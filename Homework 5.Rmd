@@ -40,5 +40,8 @@ baltimore <- homicides %>%
                                  year = year(reported_date)) %>%
   group_by(year, month) %>%
   summarize(total_homicides = n()) %>%
-  mutate(month_year = as.Date(paste(year, month, "01", sep = "-")))
+  mutate(month_year = as.Date(paste(year, month, "01", sep = "-"))) %>%
+  mutate(season = case_when(
+    month >=5 & month <=10 ~ "summer",
+    month >=1 & month <=4 | month %in% 11:12 ~ "winter"))
 ```
