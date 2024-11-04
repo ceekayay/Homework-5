@@ -23,3 +23,7 @@ library("ggfortify")
 library("stringr")
 library("ggthemes")
 ```
+
+```{r data}
+homicides <- read_csv("data/homicide-data.csv")
+```
